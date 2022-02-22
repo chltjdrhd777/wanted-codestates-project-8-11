@@ -2,17 +2,20 @@
   <main class="flex-center">
     <section class="container">
       <RadarChart />
+      <BarChart />
     </section>
   </main>
 </template>
 
 <script>
 import RadarChart from "./components/RadarChar.vue";
+import BarChart from "./components/BarChar.vue";
 
 export default {
   name: "App",
   components: {
     RadarChart,
+    BarChart,
   },
 };
 </script>
