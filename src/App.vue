@@ -63,6 +63,7 @@ export default {
         user: surveyData.userSurvey,
         company: null,
       },
+      companyData: {},
       selectedTab: 0,
       searchValue: "",
       companyList: ["삼성", "카카오", "lg"],
@@ -79,23 +80,50 @@ export default {
         }, 1000);
       } else {
         this.searchValue = value;
+        this.setChartData();
       }
     },
     deleteSearchvalue() {
-      console.log("hello");
       this.searchValue = "";
+      this.companyData = {};
+    },
+
+    setChartData() {
+      switch (this.searchValue) {
+        case "카카오":
+          this.chartData = {
+            ...this.chartData,
+            company: surveyData.companySurvey.kakaoSurvey,
+          };
+          this.companyData = surveyData.companySurvey.kakaoSurvey;
+          break;
+        case "삼성":
+          this.chartData = {
+            ...this.chartData,
+            company: surveyData.companySurvey.samsungSurvey,
+          };
+          this.companyData = surveyData.companySurvey.samsungSurvey;
+          break;
+        case "lg":
+          this.chartData = {
+            ...this.chartData,
+            company: surveyData.companySurvey.lgSurvey,
+          };
+          this.companyData = surveyData.companySurvey.lgSurvey;
+          break;
+        default:
+          return;
+      }
     },
 
     onTabClick(key) {
       this.selectedTab = key;
 
-      this.chartData = {};
-
       switch (this.selectedTab) {
         case 0:
           this.chartData = {
             user: surveyData.userSurvey,
-            company: surveyData.companySurvey.lgSurvey,
+            company: this.companyData,
           };
           break;
         case 1:
@@ -107,7 +135,7 @@ export default {
         case 2:
           this.chartData = {
             user: null,
-            company: surveyData.companySurvey.lgSurvey,
+            company: this.companyData,
           };
           break;
         default:

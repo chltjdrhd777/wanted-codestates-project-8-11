@@ -10,7 +10,11 @@
         <button class="button-x" type="button" @click="deleteCompany"></button>
       </div>
     </div>
-    <input type="text" @keyup.enter="submit" placeholder="기업명을 검색하세요" />
+    <input
+      type="text"
+      @keyup.enter="submit"
+      placeholder="기업명을 검색하세요"
+    />
   </div>
 </template>
 
