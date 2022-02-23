@@ -35,6 +35,29 @@ export default {
             z: 1,
             data: [...Object.values(this.surveyData.userSurvey)],
           },
+          {
+          backgroundColor: "rgba(244, 244, 244, 0.32)",
+          borderColor: "#B2B2B2",
+          borderWidth: 1,
+          pointBackgroundColor: [
+            "rgba(237, 168, 154, 0.7)",
+            "rgba(182, 197, 248, 0.7)",
+            "rgba(164, 214, 227, 0.7)",
+            "rgba(238, 184, 207, 0.7)",
+            "rgba(183, 220, 171, 0.7)",
+          ],
+          pointBorderColor: [
+            "#EDA89A",
+            "#B6C5F8",
+            "#A4D6E3",
+            "#EEB8CF",
+            "#B7DCAB",
+          ],
+          pointRadius: 16,
+          pointHitRadius: -16,
+          order: 0,
+          data: [10, 10, 10, 10, 10],
+        },
         ],
       },
       {
@@ -48,8 +71,10 @@ export default {
         },
         scale: {
           pointLabels: {
-            fontColor: "blue",
-            fontSize: 15,
+            fontFamily: "Noto Sans",
+            fontStyle: "bold",
+            fontColor: "black",
+            fontSize: 14,
           },
           ticks: {
             max: 10,
@@ -57,8 +82,11 @@ export default {
             stepSize: 2.5,
             display: false,
           },
-        },
-      }
+          gridLines: {
+            borderDash: [5, 5],
+          },
+        }
+      },
     );
   },
 };
