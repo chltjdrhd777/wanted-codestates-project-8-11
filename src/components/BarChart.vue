@@ -58,12 +58,14 @@ export default {
       // negativeObj: 양 옆으로 그래프가 표시되도록 userSurvey는 음수 값으로 변경하였습니다.
       let userObj =
         value.user !== null ? Object.values(value.user) : [0, 0, 0, 0, 0];
-      let negativeUserObj = userObj.map((i) => (i >= 5 ? i * -1 : 10 - i));
+      let negativeUserObj = userObj.map((i) =>
+        i >= 5 || i === 0 ? i * -1 : 10 - i
+      );
 
       let companyObj =
         value.company !== null ? Object.values(value.company) : [0, 0, 0, 0, 0];
       let negativeCompanyObj = companyObj.map((i) =>
-        i >= 5 ? i * -1 : 10 - i
+        i >= 5 || i === 0 ? i * -1 : 10 - i
       );
 
       const data = {

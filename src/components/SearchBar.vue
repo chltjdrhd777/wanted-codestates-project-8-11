@@ -102,17 +102,18 @@ input {
 .company {
   color: rgb(161, 159, 159);
   margin-right: 10px;
+  margin-top: 8px;
 }
 
 /* x 버튼 */
 .button-x {
-  margin-top: 6px;
-  width: 16px;
-  height: 16px;
+  margin-top: 11px;
+  padding: 8px;
+  width: 6px;
+  height: 6px;
   position: relative;
   background: #d2d2d2;
   border-radius: 50%;
-  text-indent: -9999px;
   border: none;
   cursor: pointer;
 }
