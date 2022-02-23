@@ -7,7 +7,7 @@
       :class="{ active: selectedTab === index }"
     >
       <img :src="item.logo.src" :alt="item.logo.alt" width="14px" />
-      {{ item.title }}
+      <span class="tab-title">{{ item.title }}</span>
     </button>
   </div>
 </template>
@@ -46,6 +46,7 @@ export default {
   background: #f2f2f2;
 }
 button {
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -60,5 +61,9 @@ button {
 button.active {
   background-color: white;
   color: black;
+}
+
+.tab-title {
+  margin: 0 6px;
 }
 </style>
