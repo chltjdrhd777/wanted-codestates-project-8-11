@@ -3,7 +3,7 @@ class Survey {
     this.aggressive = aggressive;
     this.confident = confident;
     this.responsible = responsible;
-    this.individual = indivisual;
+    this.indivisual = indivisual;
     this.horizontal = horizontal;
   }
 }
