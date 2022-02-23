@@ -19,7 +19,7 @@
           @onTabClick="onTabClick"
         />
       </div>
-      <!-- <BarChart :surveyData="surveyData" /> -->
+      <BarChartWrapper :chartValue="chartData" />
     </section>
 
     <Modal v-if="searchValue === null" />
@@ -29,7 +29,7 @@
 <script>
 import { surveyData } from "@/data";
 import RadarChart from "./components/RadarChart.vue";
-// import BarChart from "./components/BarChart.vue";
+import BarChartWrapper from "./components/BarChartWrapper.vue";
 import TopHeader from "./components/TopHeader.vue";
 import SearchBar from "./components/SearchBar.vue";
 import Modal from "./components/ModalView.vue";
@@ -39,7 +39,7 @@ export default {
   name: "App",
   components: {
     RadarChart,
-    // BarChart,
+    BarChartWrapper,
     TopHeader,
     SearchBar,
     Modal,

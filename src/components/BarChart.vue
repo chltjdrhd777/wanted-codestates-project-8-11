@@ -4,38 +4,97 @@ import { HorizontalBar } from "vue-chartjs";
 export default {
   extends: HorizontalBar,
   props: {
-    surveyData: Object,
+    chartValue: Object,
   },
-  mounted() {
-    // negativeObj: 양 옆으로 그래프가 표시되도록 userSurvey는 음수 값으로 변경하였습니다.
-    let obj = [Object.values(this.surveyData.userSurvey)];
-    let negativeObj = obj[0].map(i => i*-1);
-    this.renderChart(
-      {
-        labels: [...Object.keys(this.surveyData.userSurvey)], // 테이블 만들어지면 지울 것
+
+  data() {
+    return {
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false,
+        },
+        tooltips: {
+          callbacks: {
+            label: function (tooltipItem) {
+              return tooltipItem.yLabel;
+            },
+          },
+        },
+        scales: {
+          yAxes: [
+            {
+              barPercentage: 0.5,
+              gridLines: {
+                display: false,
+              },
+              ticks: {
+                fontSize: 20,
+                beginAtZero: true,
+              },
+            },
+          ],
+          xAxes: [
+            {
+              gridLines: {
+                display: false,
+              },
+              ticks: {
+                display: false,
+                min: -10,
+                max: 10,
+                stepSize: 20,
+              },
+            },
+          ],
+        },
+      },
+    };
+  },
+
+  methods: {
+    getData(value) {
+      // negativeObj: 양 옆으로 그래프가 표시되도록 userSurvey는 음수 값으로 변경하였습니다.
+      let userObj =
+        value.user !== null ? Object.values(value.user) : [0, 0, 0, 0, 0];
+      let negativeUserObj = userObj.map((i) => (i >= 5 ? i * -1 : 10 - i));
+
+      let companyObj =
+        value.company !== null ? Object.values(value.company) : [0, 0, 0, 0, 0];
+      let negativeCompanyObj = companyObj.map((i) =>
+        i >= 5 ? i * -1 : 10 - i
+      );
+
+      const data = {
+        labels: ["", "", "", "", ""], // 테이블 만들어지면 지울 것
         datasets: [
           {
             label: "Data One",
-            backgroundColor: "#f87979",
-            data: [...negativeObj]
+            backgroundColor: "#6E3CF9",
+            data: negativeUserObj,
           },
           {
             label: "Data two",
-            backgroundColor: "#f87979",
-            data: [...Object.values(this.surveyData.companySurvey.samsungSurvey)]
-          }
-        ]
-      },
-      { responsive: true, maintainAspectRatio: false,
-      legend: {
-        display: false,
-      title: {
-        display: true,
-        text: 'Chart.js Horizontal Bar Chart'
-      }
-    }
-      }
-    );
-  }
+            backgroundColor: "#FFC24A",
+            data: negativeCompanyObj,
+          },
+        ],
+      };
+      return data;
+    },
+  },
+
+  mounted() {
+    console.log("123123321");
+    this.renderChart(this.getData(this.chartValue), this.options);
+  },
+
+  watch: {
+    chartValue() {
+      this.renderChart(this.getData(this.chartValue), this.options);
+    },
+    deep: true,
+  },
 };
 </script>

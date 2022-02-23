@@ -12,7 +12,6 @@ export default {
 
   methods: {
     getData(value) {
-      console.log(value.company);
       const chartData = {
         labels: [
           ["적극적인", "Aggressive", ""],
@@ -32,9 +31,7 @@ export default {
             pointHitRadius: 0,
             order: 1,
             data:
-              this.chartValue.user !== null
-                ? [...Object.values(value.user)]
-                : null,
+              this.chartValue.user !== null ? Object.values(value.user) : null,
           },
           {
             backgroundColor: "rgba(110, 60, 249, 0.32)",
@@ -46,7 +43,7 @@ export default {
             order: 2,
             data:
               this.chartValue.company !== null
-                ? [...Object.values(value.company)]
+                ? Object.values(value.company)
                 : null,
           },
           {
@@ -116,7 +113,7 @@ export default {
   },
 
   watch: {
-    chartValue() {
+    chartValue: function () {
       this.renderChart(this.getData(this.chartValue), this.options);
     },
     deep: true,
