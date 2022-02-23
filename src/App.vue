@@ -1,16 +1,20 @@
 <template>
   <main class="flex-center">
     <section class="container">
-      <RadarChart :chartData="chartData" :options="options" />
-      <BarChart :options="options2" />
+      <div class="radar-wrapper">
+        <img src="./assets/cat.png" alt="cat thumb" class="thumb" />
+        <RadarChart :chartData="chartData" :options="options" />
+      </div>
+      <BarChart :surveyData="surveyData" />
     </section>
   </main>
 </template>
 
 <script>
 import { surveyData } from "@/data";
-import BarChart from "./components/BarChart.vue";
 import RadarChart from "./components/RadarChart.vue";
+import BarChart from "./components/BarChart.vue";
+
 export default {
   name: "App",
   components: {
@@ -23,7 +27,11 @@ export default {
       companySurvey: { samsungSurvey },
     } = surveyData;
     const chartData = {
-      labels: [...Object.keys(userSurvey)],
+      labels: [["적극적인", "Aggressive"],
+        ["자신있는", "Confident"],
+        ["책임있는", "Responsible"],
+        ["개인주의", "Indivisual"],
+        ["수평적인", "Horizontal"],],
       datasets: [
         {
           backgroundColor: "rgba(255, 193, 74, 0.32)",
@@ -45,8 +53,7 @@ export default {
         },
       ],
     };
-    const image = new Image();
-    image.src = "./assets/cat.png";
+
     const options = {
       responsive: true,
       maintainAspectRatio: false,
@@ -66,33 +73,13 @@ export default {
           min: 0,
           stepSize: 2.5,
           display: false,
-          //beginAtZero: true,
         },
-      },
-    };
-    const options2 = {
-      legend: {
-        display: false,
-      },
-      annotation: {
-        annotations: [
-          {
-            type: "line",
-            mode: "horizontal",
-            scaleID: "y-axis-0",
-            borderWidth: 4,
-            label: {
-              enabled: false,
-              content: "Test label",
-            },
-          },
-        ],
       },
     };
     return {
       chartData,
       options,
-      options2,
+      surveyData,
     };
   },
 };
@@ -121,11 +108,33 @@ main {
   height: 100vh;
   background-color: #e5e5e5;
 }
+
 .container {
   width: 360px;
   height: 785px;
   background-color: #fff;
 }
+
+.container .radar-wrapper {
+  position: relative;
+  width: 360px;
+  height: 381px;
+}
+
+.container .radar-wrapper > img {
+  width: 54px;
+  height: 54px;
+  border-radius: 160px;
+  overflow: hidden;
+  position: absolute;
+  left: 42.22%;
+  right: 42.78%;
+  top: 43.57%;
+  bottom: 42.26%;
+  background-color: white;
+  object-fit: cover;
+}
+
 .flex-center {
   display: flex;
   align-items: center;
