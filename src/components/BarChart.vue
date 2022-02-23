@@ -55,17 +55,11 @@ export default {
   methods: {
     getData(value) {
       // negativeObj: 양 옆으로 그래프가 표시되도록 userSurvey는 음수 값으로 변경하였습니다.
-      let userObj =
-        value.user !== null ? Object.values(value.user) : [0, 0, 0, 0, 0];
-      let negativeUserObj = userObj.map((i) =>
-        i >= 5 || i === 0 ? i * -1 : 10 - i
-      );
+      let userObj = value.user !== null ? Object.values(value.user) : [0, 0, 0, 0, 0];
+      let negativeUserObj = userObj.map((i) => (i >= 5 || i === 0 ? i * -1 : 10 - i));
 
-      let companyObj =
-        value.company !== null ? Object.values(value.company) : [0, 0, 0, 0, 0];
-      let negativeCompanyObj = companyObj.map((i) =>
-        i >= 5 || i === 0 ? i * -1 : 10 - i
-      );
+      let companyObj = value.company !== null ? Object.values(value.company) : [0, 0, 0, 0, 0];
+      let negativeCompanyObj = companyObj.map((i) => (i >= 5 || i === 0 ? i * -1 : 10 - i));
 
       const data = {
         labels: ["", "", "", "", ""], // 테이블 만들어지면 지울 것

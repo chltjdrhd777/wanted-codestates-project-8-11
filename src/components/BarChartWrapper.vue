@@ -6,9 +6,7 @@
     </div>
     <table>
       <tr v-for="(list, i) in userObj" v-bind:key="list">
-        <td
-          :style="[data[list] >= 5 ? { color: 'green' } : { color: 'black' }]"
-        >
+        <td :style="[data[list] >= 5 ? { color: 'green' } : { color: 'black' }]">
           {{ data[list] }}/{{ MAX_SCORE }}
         </td>
         <td
@@ -21,10 +19,7 @@
           {{ personalityArray[i][0] }}
         </td>
         <td v-if="i === 0" rowspan="5" class="chart">
-          <BarChart
-            :chartValue="chartValue"
-            v-bind:style="{ width: '165px', height: '230px' }"
-          />
+          <BarChart :chartValue="chartValue" v-bind:style="{ width: '165px', height: '230px' }" />
         </td>
         <td
           :style="[

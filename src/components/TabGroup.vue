@@ -52,6 +52,7 @@ button {
   align-items: center;
   padding: 14px 16px;
   border: 0;
+  cursor: pointer;
 
   background: #f2f2f2;
   border-radius: 4px;

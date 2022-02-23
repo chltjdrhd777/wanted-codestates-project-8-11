@@ -10,7 +10,7 @@
       </div>
       <span class="result">진단결과</span>
     </div>
-    <button class="rediag" @click="reloadPage">다시 진단하기</button>
+    <div class="rediag" @click="reloadPage">다시 진단하기</div>
   </div>
 </template>
 
@@ -19,8 +19,8 @@ export default {
   methods: {
     reloadPage() {
       window.location.reload();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -46,18 +46,18 @@ export default {
   position: relative;
 }
 .arr span::after {
-  content: '';
-  width: 6px; 
-  height: 6px; 
-  border-top: 2px solid #121212; 
-  border-right: 2px solid #121212; 
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #121212;
+  border-right: 2px solid #121212;
   display: inline-block;
-  transform: rotate(225deg); 
+  transform: rotate(225deg);
   position: absolute;
-  top: 8px; 
-  left: 7px; 
+  top: 8px;
+  left: 7px;
 }
-.circle{
+.circle {
   width: 28px;
   height: 28px;
   left: 0%;
@@ -69,7 +69,7 @@ export default {
   border-radius: 80px;
   margin-right: 15px;
 }
-.arrow{
+.arrow {
   width: 9px;
   height: 10px;
   position: absolute;
@@ -90,9 +90,10 @@ export default {
 .rediag {
   font-size: 16px;
   font-weight: 400;
-  color: #6E3CF9;
+  color: #6e3cf9;
   background-color: white;
   border: none;
   cursor: pointer;
+  padding: 0;
 }
 </style>

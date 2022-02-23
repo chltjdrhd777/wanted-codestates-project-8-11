@@ -13,11 +13,7 @@
         <RadarChart :chartValue="chartData" />
       </div>
       <div class="tab-wrapper">
-        <TabGroup
-          :selectedTab="selectedTab"
-          :tabItems="tabItems"
-          @onTabClick="onTabClick"
-        />
+        <TabGroup :selectedTab="selectedTab" :tabItems="tabItems" @onTabClick="onTabClick" />
       </div>
       <BarChartWrapper :chartValue="chartData" />
     </section>

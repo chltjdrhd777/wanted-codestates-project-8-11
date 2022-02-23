@@ -5,7 +5,7 @@
         <span>검색 결과</span>
         <span>></span>
       </div>
-      <div class="remove-container">
+      <div class="remove-container" v-if="searchValue">
         <div class="company">{{ searchValue }}</div>
         <button class="button-x" type="button" @click="deleteCompany"></button>
       </div>
@@ -14,6 +14,7 @@
       type="text"
       @keyup.enter="submit"
       placeholder="기업명을 검색하세요"
+      v-model="inputValue"
     />
   </div>
 </template>
@@ -25,12 +26,24 @@ export default {
     setSearchValue: Function,
     deleteSearchvalue: Function,
   },
+  data() {
+    return {
+      inputValue: "",
+    };
+  },
   methods: {
+    onInputChage(e) {
+      console.log(e);
+    },
     deleteCompany() {
       this.deleteSearchvalue();
+      this.inputValue = "";
     },
     submit(e) {
       this.setSearchValue(e.target.value);
+      if (this.searchValue === null) {
+        this.inputValue = "";
+      }
     },
   },
 };
@@ -83,6 +96,7 @@ export default {
   display: flex;
   flex-direction: row;
   margin-right: 16px;
+  align-items: center;
 }
 
 /* 검색박스 */
@@ -102,12 +116,12 @@ input {
 .company {
   color: rgb(161, 159, 159);
   margin-right: 10px;
-  margin-top: 8px;
+  /* margin-top: 8px; */
 }
 
 /* x 버튼 */
 .button-x {
-  margin-top: 11px;
+  /* margin-top: 11px; */
   padding: 8px;
   width: 6px;
   height: 6px;
