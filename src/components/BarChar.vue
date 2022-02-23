@@ -1,47 +1,60 @@
 <script>
-import { Bar } from "vue-chartjs";
+import { HorizontalBar } from "vue-chartjs";
 
 export default {
-  extends: Bar,
+  extends: HorizontalBar,
   mounted() {
     this.renderChart(
       {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ],
+        labels: ["", "", "", "", ""],
         datasets: [
           {
-            label: "Data One",
-            backgroundColor: "#f87979",
-            data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11],
-            scales: {
-              x: {
-                grid: {
-                  display: false,
-                },
-              },
-              y: {
-                grid: {
-                  display: false,
-                },
-              },
-            },
+            label: "two",
+            backgroundColor: "#6E3CF9",
+            data: [-8, -8, -6, 8, -4],
+            borderWidth: 4,
+          },
+          {
+            label: "one ",
+            backgroundColor: "#FFC24A",
+            data: [-10, -10, -10, 2, -6],
+            borderWidth: 4,
           },
         ],
       },
-
-      { responsive: true, maintainAspectRatio: false }
+      {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: { display: false },
+        scales: {
+          yAxes: [
+            {
+              barPercentage: 0.5,
+              gridLines: {
+                display: false,
+              },
+              ticks: {
+                fontSize: 20,
+                beginAtZero: true,
+              },
+            },
+          ],
+          xAxes: [
+            {
+              gridLines: {
+                display: false,
+              },
+              ticks: {
+                display: false,
+                min: -10,
+                max: 10,
+                stepSize: 20,
+              },
+            },
+          ],
+        },
+      }
+         
     );
   },
 };

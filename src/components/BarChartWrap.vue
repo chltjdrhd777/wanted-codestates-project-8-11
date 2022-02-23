@@ -9,7 +9,8 @@
         <td>{{ data.aggressive }}/{{ MAX_SCORE }}</td>
         <td>적극성</td>
         <td rowspan="5" class="chart">
-          <BarChart width="50" height="200" />
+          <BarChart width="80px" height="230px" />
+
         </td>
         <td>수동성</td>
         <td>{{ MAX_SCORE - data.aggressive }}/{{ MAX_SCORE }}</td>
@@ -53,6 +54,9 @@ const { userSurvey } = surveyData;
 const MAX_SCORE = 10;
 
 export default {
+  mounted() {
+    console.log("bar", this.options);
+  },
   components: {
     BarChart,
   },
@@ -90,5 +94,6 @@ table {
   /* display: flex;
   justify-content: center;
   align-items: center; */
+
 }
 </style>
