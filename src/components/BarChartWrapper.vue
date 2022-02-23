@@ -60,9 +60,7 @@ export default {
   props: {
     chartValue: Object,
   },
-  mounted() {
-    console.log(this.chartValue, "wrappper");
-  },
+  mounted() {},
   components: {
     BarChart,
   },
@@ -98,10 +96,5 @@ table {
   font-size: 10px;
   text-align: center;
   padding: 0 20px;
-}
-.chart {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 }
 </style>

@@ -100,7 +100,6 @@ export default {
       this.searchValue = "";
       this.companyData = {};
       this.chartData = { ...this.chartData, company: null };
-      console.log(this.chartData);
     },
 
     setChartData() {

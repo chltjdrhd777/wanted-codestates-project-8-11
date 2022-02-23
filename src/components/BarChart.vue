@@ -25,7 +25,6 @@ export default {
         scales: {
           yAxes: [
             {
-              barPercentage: 0.5,
               gridLines: {
                 display: false,
               },
@@ -74,11 +73,13 @@ export default {
           {
             label: "Data One",
             backgroundColor: "#6E3CF9",
+            barPercentage: 0.5,
             data: negativeUserObj,
           },
           {
             label: "Data two",
             backgroundColor: "#FFC24A",
+            barPercentage: 0.5,
             data: negativeCompanyObj,
           },
         ],
@@ -88,7 +89,6 @@ export default {
   },
 
   mounted() {
-    console.log("123123321");
     this.renderChart(this.getData(this.chartValue), this.options);
   },
 
