@@ -25,9 +25,22 @@ export default {
             label: "Data One",
             backgroundColor: "#f87979",
             data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11],
+            scales: {
+              x: {
+                grid: {
+                  display: false,
+                },
+              },
+              y: {
+                grid: {
+                  display: false,
+                },
+              },
+            },
           },
         ],
       },
+
       { responsive: true, maintainAspectRatio: false }
     );
   },
