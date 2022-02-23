@@ -1,18 +1,119 @@
 <template>
   <main class="flex-center">
     <section class="container">
-      <RadarChart />
+      <TopHeader />
+      <SearchBar
+        :searchValue="searchValue"
+        :setSearchValue="setSearchValue"
+        :deleteSearchvalue="deleteSearchvalue"
+      />
+
+      <div class="radar-wrapper">
+        <img src="./assets/cat.png" alt="cat thumb" class="thumb" />
+        <RadarChart :chartValue="chartData" />
+      </div>
+      <div class="tab-wrapper">
+        <TabGroup
+          :selectedTab="selectedTab"
+          :tabItems="tabItems"
+          @onTabClick="onTabClick"
+        />
+      </div>
+      <BarChartWrapper :chartValue="chartData" />
     </section>
+
+    <Modal v-if="searchValue === null" />
   </main>
 </template>
 
 <script>
-import RadarChart from "./components/RadarChar.vue";
+import { surveyData } from "@/data";
+import RadarChart from "./components/RadarChart.vue";
+import BarChartWrapper from "./components/BarChartWrapper.vue";
+import TopHeader from "./components/TopHeader.vue";
+import SearchBar from "./components/SearchBar.vue";
+import Modal from "./components/ModalView.vue";
+import TabGroup from "./components/TabGroup.vue";
 
 export default {
   name: "App",
   components: {
     RadarChart,
+    BarChartWrapper,
+    TopHeader,
+    SearchBar,
+    Modal,
+    TabGroup,
+  },
+  data() {
+    const tabItems = [
+      {
+        title: "모두",
+      },
+      {
+        title: "본인",
+      },
+      {
+        title: "회사",
+      },
+    ];
+
+    return {
+      chartData: {
+        user: surveyData.userSurvey,
+        company: null,
+      },
+      selectedTab: 0,
+      searchValue: "",
+      companyList: ["삼성", "카카오", "lg"],
+      tabItems,
+    };
+  },
+  methods: {
+    setSearchValue(value) {
+      value = value.toLowerCase();
+      if (!this.companyList.includes(value)) {
+        this.searchValue = null;
+        setTimeout(() => {
+          this.searchValue = "";
+        }, 1000);
+      } else {
+        this.searchValue = value;
+      }
+    },
+    deleteSearchvalue() {
+      console.log("hello");
+      this.searchValue = "";
+    },
+
+    onTabClick(key) {
+      this.selectedTab = key;
+
+      this.chartData = {};
+
+      switch (this.selectedTab) {
+        case 0:
+          this.chartData = {
+            user: surveyData.userSurvey,
+            company: surveyData.companySurvey.lgSurvey,
+          };
+          break;
+        case 1:
+          this.chartData = {
+            user: surveyData.userSurvey,
+            company: null,
+          };
+          break;
+        case 2:
+          this.chartData = {
+            user: null,
+            company: surveyData.companySurvey.lgSurvey,
+          };
+          break;
+        default:
+          return;
+      }
+    },
   },
 };
 </script>
@@ -23,11 +124,9 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-
 html {
   font-size: 62.5%;
 }
-
 body {
   font-size: 1.6rem;
   font-family: "Noto Sans", sans-serif;
@@ -37,22 +136,47 @@ body {
   -ms-user-select: none;
   -o-user-select: none;
 }
-
 main {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   background-color: #e5e5e5;
 }
 
 .container {
   width: 360px;
-  height: 785px;
+  /* height: 785px; */
+  min-height: 785px;
   background-color: #fff;
+}
+
+.container .radar-wrapper {
+  position: relative;
+  width: 360px;
+  height: 381px;
+}
+
+.container .radar-wrapper > img {
+  width: 54px;
+  height: 54px;
+  border-radius: 160px;
+  overflow: hidden;
+  position: absolute;
+  left: 43%;
+  top: 49%;
+  background-color: white;
+  object-fit: cover;
 }
 
 .flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.tab-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
 }
 </style>
