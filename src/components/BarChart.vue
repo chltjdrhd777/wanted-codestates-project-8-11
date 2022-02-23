@@ -7,6 +7,7 @@ export default {
     surveyData: Object,
   },
   mounted() {
+    // negativeObj: 양 옆으로 그래프가 표시되도록 userSurvey는 음수 값으로 변경하였습니다.
     let obj = [Object.values(this.surveyData.userSurvey)];
     let negativeObj = obj[0].map(i => i*-1);
     this.renderChart(
