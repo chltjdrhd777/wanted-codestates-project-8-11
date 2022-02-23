@@ -10,9 +10,16 @@
 
       <div class="radar-wrapper">
         <img src="./assets/cat.png" alt="cat thumb" class="thumb" />
-        <RadarChart :chartData="chartData" :options="options" />
+        <RadarChart :chartValue="chartData" />
       </div>
-      <BarChart :surveyData="surveyData" />
+      <div class="tab-wrapper">
+        <TabGroup
+          :selectedTab="selectedTab"
+          :tabItems="tabItems"
+          @onTabClick="onTabClick"
+        />
+      </div>
+      <!-- <BarChart :surveyData="surveyData" /> -->
     </section>
 
     <Modal v-if="searchValue === null" />
@@ -22,108 +29,44 @@
 <script>
 import { surveyData } from "@/data";
 import RadarChart from "./components/RadarChart.vue";
-import BarChart from "./components/BarChart.vue";
+// import BarChart from "./components/BarChart.vue";
 import TopHeader from "./components/TopHeader.vue";
 import SearchBar from "./components/SearchBar.vue";
 import Modal from "./components/ModalView.vue";
+import TabGroup from "./components/TabGroup.vue";
 
 export default {
   name: "App",
   components: {
     RadarChart,
-    BarChart,
+    // BarChart,
     TopHeader,
     SearchBar,
     Modal,
+    TabGroup,
   },
   data() {
-    const {
-      userSurvey,
-      companySurvey: { samsungSurvey },
-    } = surveyData;
-    const chartData = {
-      labels: [
-        ["적극적인", "Aggressive", ""],
-        ["  자신있는", "Confident", ""],
-        ["", "    책임있는", "Responsible"],
-        ["", "개인주의  ", "Indivisual"],
-        ["수평적인   ", "Horizontal", ""],
-      ],
-      datasets: [
-        {
-          backgroundColor: "rgba(255, 193, 74, 0.32)",
-          borderColor: "#FFD335",
-          borderWidth: 2,
-          borderRadius: 1,
-          pointBackgroundColor: "rgba(255,99,132,1)",
-          pointRadius: 0,
-          pointHitRadius: 0,
-          order: 1,
-          data: [...Object.values(samsungSurvey)],
-        },
-        {
-          backgroundColor: "rgba(110, 60, 249, 0.32)",
-          borderColor: "#6E3CF9",
-          borderWidth: 2,
-          borderRadius: 1,
-          pointRadius: 0,
-          pointHitRadius: 0,
-          order: 2,
-          data: [...Object.values(userSurvey)],
-        },
-        {
-          backgroundColor: "rgba(244, 244, 244, 0.32)",
-          borderColor: "#B2B2B2",
-          borderWidth: 1,
-          pointBackgroundColor: [
-            "rgba(237, 168, 154, 0.7)",
-            "rgba(182, 197, 248, 0.7)",
-            "rgba(164, 214, 227, 0.7)",
-            "rgba(238, 184, 207, 0.7)",
-            "rgba(183, 220, 171, 0.7)",
-          ],
-          pointBorderColor: ["#EDA89A", "#B6C5F8", "#A4D6E3", "#EEB8CF", "#B7DCAB"],
-          pointRadius: 16,
-          pointHitRadius: -16,
-          order: 0,
-          data: [10, 10, 10, 10, 10],
-        },
-      ],
-    };
+    const tabItems = [
+      {
+        title: "모두",
+      },
+      {
+        title: "본인",
+      },
+      {
+        title: "회사",
+      },
+    ];
 
-    const options = {
-      responsive: true,
-      maintainAspectRatio: false,
-      legend: {
-        display: false,
-      },
-      layout: {
-        padding: 20,
-      },
-      scale: {
-        pointLabels: {
-          fontFamily: "Noto Sans",
-          fontStyle: "bold",
-          fontColor: "black",
-          fontSize: 14,
-        },
-        ticks: {
-          max: 10,
-          min: 0,
-          stepSize: 2.5,
-          display: false,
-        },
-        gridLines: {
-          borderDash: [5, 5],
-        },
-      },
-    };
     return {
-      chartData,
-      options,
-      surveyData,
+      chartData: {
+        user: surveyData.userSurvey,
+        company: null,
+      },
+      selectedTab: 0,
       searchValue: "",
       companyList: ["삼성", "카카오", "lg"],
+      tabItems,
     };
   },
   methods: {
@@ -141,6 +84,35 @@ export default {
     deleteSearchvalue() {
       console.log("hello");
       this.searchValue = "";
+    },
+
+    onTabClick(key) {
+      this.selectedTab = key;
+
+      this.chartData = {};
+
+      switch (this.selectedTab) {
+        case 0:
+          this.chartData = {
+            user: surveyData.userSurvey,
+            company: surveyData.companySurvey.lgSurvey,
+          };
+          break;
+        case 1:
+          this.chartData = {
+            user: surveyData.userSurvey,
+            company: null,
+          };
+          break;
+        case 2:
+          this.chartData = {
+            user: null,
+            company: surveyData.companySurvey.lgSurvey,
+          };
+          break;
+        default:
+          return;
+      }
     },
   },
 };
@@ -200,5 +172,11 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.tab-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
 }
 </style>
