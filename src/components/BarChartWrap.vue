@@ -7,10 +7,9 @@
     <table>
       <tr>
         <td>{{ data.aggressive }}/{{ MAX_SCORE }}</td>
-        <td>적극성</td>
+        <td style="[color : data.aggressive > 5 ? green : black ]">적극성</td>
         <td rowspan="5" class="chart">
           <BarChart width="80px" height="230px" />
-
         </td>
         <td>수동성</td>
         <td>{{ MAX_SCORE - data.aggressive }}/{{ MAX_SCORE }}</td>
@@ -31,9 +30,9 @@
       </tr>
       <tr>
         <td>{{ data.indivisual }}/{{ MAX_SCORE }}</td>
-        <td>개인적</td>
+        <td>개인성향</td>
         <!-- <td></td> -->
-        <td>조직서향</td>
+        <td>조직성향</td>
         <td>{{ MAX_SCORE - data.indivisual }}/{{ MAX_SCORE }}</td>
       </tr>
       <tr>
@@ -94,6 +93,5 @@ table {
   /* display: flex;
   justify-content: center;
   align-items: center; */
-
 }
 </style>
