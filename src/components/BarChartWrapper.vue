@@ -23,7 +23,7 @@
         <td v-if="i === 0" rowspan="5" class="chart">
           <BarChart
             :chartValue="chartValue"
-            v-bind:style="{ width: '170px', height: '230px' }"
+            v-bind:style="{ width: '165px', height: '230px' }"
           />
         </td>
         <td
