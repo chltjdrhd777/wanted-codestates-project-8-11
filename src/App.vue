@@ -1,12 +1,21 @@
 <template>
   <main class="flex-center">
     <section class="container">
+      <TopHeader />
+      <SearchBar
+        :searchValue="searchValue"
+        :setSearchValue="setSearchValue"
+        :deleteSearchvalue="deleteSearchvalue"
+      />
+
       <div class="radar-wrapper">
         <img src="./assets/cat.png" alt="cat thumb" class="thumb" />
         <RadarChart :chartData="chartData" :options="options" />
       </div>
       <BarChart :surveyData="surveyData" />
     </section>
+
+    <Modal v-if="searchValue === null" />
   </main>
 </template>
 
@@ -14,12 +23,18 @@
 import { surveyData } from "@/data";
 import RadarChart from "./components/RadarChart.vue";
 import BarChart from "./components/BarChart.vue";
+import TopHeader from "./components/TopHeader.vue";
+import SearchBar from "./components/SearchBar.vue";
+import Modal from "./components/ModalView.vue";
 
 export default {
   name: "App",
   components: {
     RadarChart,
     BarChart,
+    TopHeader,
+    SearchBar,
+    Modal,
   },
   data() {
     const {
@@ -67,13 +82,7 @@ export default {
             "rgba(238, 184, 207, 0.7)",
             "rgba(183, 220, 171, 0.7)",
           ],
-          pointBorderColor: [
-            "#EDA89A",
-            "#B6C5F8",
-            "#A4D6E3",
-            "#EEB8CF",
-            "#B7DCAB",
-          ],
+          pointBorderColor: ["#EDA89A", "#B6C5F8", "#A4D6E3", "#EEB8CF", "#B7DCAB"],
           pointRadius: 16,
           pointHitRadius: -16,
           order: 0,
@@ -113,7 +122,26 @@ export default {
       chartData,
       options,
       surveyData,
+      searchValue: "",
+      companyList: ["삼성", "카카오", "lg"],
     };
+  },
+  methods: {
+    setSearchValue(value) {
+      value = value.toLowerCase();
+      if (!this.companyList.includes(value)) {
+        this.searchValue = null;
+        setTimeout(() => {
+          this.searchValue = "";
+        }, 1000);
+      } else {
+        this.searchValue = value;
+      }
+    },
+    deleteSearchvalue() {
+      console.log("hello");
+      this.searchValue = "";
+    },
   },
 };
 </script>
@@ -138,13 +166,15 @@ body {
 }
 main {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   background-color: #e5e5e5;
 }
 
 .container {
   width: 360px;
-  height: 785px;
+  /* height: 785px; */
+  min-height: 785px;
   background-color: #fff;
 }
 
