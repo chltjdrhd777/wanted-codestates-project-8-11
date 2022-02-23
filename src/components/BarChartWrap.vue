@@ -9,7 +9,7 @@
         <td>8/10</td>
         <td>적극성</td>
         <td rowspan="5" class="chart">
-          <BarChart width="80px" height="200px" />
+          <BarChart width="80px" height="230px" />
         </td>
         <td>수동성</td>
         <td>2/10</td>
@@ -49,6 +49,9 @@
 import BarChart from "./BarChar.vue";
 
 export default {
+  mounted() {
+    console.log("bar", this.options);
+  },
   components: {
     BarChart,
   },
@@ -76,6 +79,6 @@ table {
   /* display: flex;
   justify-content: center;
   align-items: center; */
-  background-color: red;
+  /* background-color: red; */
 }
 </style>
