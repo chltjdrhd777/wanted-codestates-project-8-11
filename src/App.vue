@@ -3,9 +3,9 @@
     <section class="container">
       <div class="radar-wrapper">
         <img src="./assets/cat.png" alt="cat thumb" class="thumb" />
-        <RadarChart :chartData="chartData" :options="options" />
+        <RadarChart :surveyData="surveyData" />
       </div>
-      <BarChart :surveyData="surveyData" />
+      <BarChartWrapper :surveyData="surveyData" />
     </section>
   </main>
 </template>
@@ -13,72 +13,16 @@
 <script>
 import { surveyData } from "@/data";
 import RadarChart from "./components/RadarChart.vue";
-import BarChart from "./components/BarChart.vue";
+import BarChartWrapper from "./components/BarChartWrapper.vue";
 
 export default {
   name: "App",
   components: {
     RadarChart,
-    BarChart,
+    BarChartWrapper,
   },
   data() {
-    const {
-      userSurvey,
-      companySurvey: { samsungSurvey },
-    } = surveyData;
-    const chartData = {
-      labels: [["적극적인", "Aggressive"],
-        ["자신있는", "Confident"],
-        ["책임있는", "Responsible"],
-        ["개인주의", "Indivisual"],
-        ["수평적인", "Horizontal"],],
-      datasets: [
-        {
-          backgroundColor: "rgba(255, 193, 74, 0.32)",
-          borderColor: "#FFD335",
-          borderWidth: 2,
-          borderRadius: 1,
-          pointBackgroundColor: "rgba(255,99,132,1)",
-          pointRadius: 0,
-          data: [...Object.values(samsungSurvey)],
-        },
-        {
-          backgroundColor: "rgba(110, 60, 249, 0.32)",
-          borderColor: "#6E3CF9",
-          borderWidth: 2,
-          borderRadius: 1,
-          pointRadius: 0,
-          z: 1,
-          data: [...Object.values(userSurvey)],
-        },
-      ],
-    };
-
-    const options = {
-      responsive: true,
-      maintainAspectRatio: false,
-      legend: {
-        display: false,
-      },
-      layout: {
-        padding: 20,
-      },
-      scale: {
-        pointLabels: {
-          fontColor: "black",
-          fontSize: 15,
-        },
-        ticks: {
-          max: 10,
-          min: 0,
-          stepSize: 2.5,
-          display: false,
-        },
-      },
-    };
     return {
-      chartData,
-      options,
       surveyData,
     };
   },
