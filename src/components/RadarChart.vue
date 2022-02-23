@@ -22,8 +22,8 @@ export default {
         ],
         datasets: [
           {
-            backgroundColor: "rgba(255, 193, 74, 0.32)",
-            borderColor: "#FFD335",
+            backgroundColor: "rgba(110, 60, 249, 0.32)",
+            borderColor: "#6E3CF9",
             borderWidth: 2,
             borderRadius: 1,
             pointBackgroundColor: "rgba(255,99,132,1)",
@@ -34,8 +34,8 @@ export default {
               this.chartValue.user !== null ? Object.values(value.user) : null,
           },
           {
-            backgroundColor: "rgba(110, 60, 249, 0.32)",
-            borderColor: "#6E3CF9",
+            backgroundColor: "rgba(255, 193, 74, 0.32)",
+            borderColor: "#FFD335",
             borderWidth: 2,
             borderRadius: 1,
             pointRadius: 0,

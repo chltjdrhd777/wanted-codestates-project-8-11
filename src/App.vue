@@ -49,12 +49,24 @@ export default {
     const tabItems = [
       {
         title: "모두",
+        logo: {
+          src: require("./assets/all.png"),
+          alt: "all",
+        },
       },
       {
         title: "본인",
+        logo: {
+          src: require("./assets/violetBox.png"),
+          alt: "myself",
+        },
       },
       {
         title: "회사",
+        logo: {
+          src: require("./assets/yellowBox.png"),
+          alt: "company",
+        },
       },
     ];
 
@@ -81,11 +93,14 @@ export default {
       } else {
         this.searchValue = value;
         this.setChartData();
+        this.onTabClick(0);
       }
     },
     deleteSearchvalue() {
       this.searchValue = "";
       this.companyData = {};
+      this.chartData = { ...this.chartData, company: null };
+      console.log(this.chartData);
     },
 
     setChartData() {

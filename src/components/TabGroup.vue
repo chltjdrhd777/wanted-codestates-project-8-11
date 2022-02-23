@@ -6,6 +6,7 @@
       v-bind:key="index"
       :class="{ active: selectedTab === index }"
     >
+      <img :src="item.logo.src" :alt="item.logo.alt" width="14px" />
       {{ item.title }}
     </button>
   </div>
@@ -32,6 +33,8 @@ export default {
       this.$emit("onTabClick", key);
     },
   },
+
+  mounted() {},
 };
 </script>
 
