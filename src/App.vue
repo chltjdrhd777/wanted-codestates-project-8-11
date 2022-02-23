@@ -2,6 +2,7 @@
   <main class="flex-center">
     <section class="container">
       <RadarChart />
+      <BarChartWrapper />
       <BarChart />
     </section>
   </main>
@@ -9,13 +10,13 @@
 
 <script>
 import RadarChart from "./components/RadarChar.vue";
-import BarChart from "./components/BarChar.vue";
+import BarChartWrapper from "./components/BarChartWrap.vue";
 
 export default {
   name: "App",
   components: {
     RadarChart,
-    BarChart,
+    BarChartWrapper,
   },
 };
 </script>
