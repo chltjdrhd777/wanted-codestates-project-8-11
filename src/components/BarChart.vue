@@ -23,17 +23,19 @@ export default {
             label: "Data two",
             backgroundColor: "#f87979",
             data: [...Object.values(this.surveyData.companySurvey.samsungSurvey)]
-          }
-        ]
+          },
+        ],
       },
-      { responsive: true, maintainAspectRatio: false,
-      legend: {
-        display: false,
-      title: {
-        display: true,
-        text: 'Chart.js Horizontal Bar Chart'
-      }
-    }
+      { 
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false,
+          title: {
+            display: true,
+            text: 'Chart.js Horizontal Bar Chart'
+          }
+        }
       }
     );
   }
